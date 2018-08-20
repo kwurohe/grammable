@@ -39,6 +39,18 @@ class GramsController < ApplicationController
     end
   end
   
+  def destroy
+    @gram = Gram.find_by_id(params[:id])
+    return render_not_found if @gram.blank?
+    
+    if @gram.valid?
+      @gram.destroy
+      redirect_to root_path
+    else
+      return render :edit, status: :unprocessable_entity
+    end      
+  end
+  
   private
   
   def gram_params
