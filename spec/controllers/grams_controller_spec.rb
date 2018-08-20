@@ -34,6 +34,7 @@ RSpec.describe GramsController, type: :controller do
   end
   
   describe "grams#update action" do
+    
     it "shouldn't let users who didn't create gram to update it" do
       gram = FactoryBot.create(:gram)
       user = FactoryBot.create(:user)
@@ -41,6 +42,7 @@ RSpec.describe GramsController, type: :controller do
       patch :update, params: { id: gram.id, gram: { message: 'woohoo'}}
       expect(response).to have_http_status(:forbidden)
     end
+    
     it "shouldn't let unauthenticated users destroy a gram" do
       gram = FactoryBot.create(:gram)
       patch :update, params: { id: gram.id, gram: { message: "Hello"}}
